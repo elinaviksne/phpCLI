@@ -1,39 +1,55 @@
 <?php
 
-//$name = readline("Ievadi savu vārdu:\n");
-//echo "Your name is $name \n";
-
 $taskList = ["first task", "second task"];
 
-function showAllTasks($inputTasks) {
-    foreach($inputTasks as $task){
+function showAllTask($inputTasks) {
+    foreach($inputTasks as $task) {
         echo $task . "\n";
     }
 }
 
-function addTask($inputTasks) {
-    echo "To be implemented";
+function addTask(&$inputTasks){
+    $task = readLine("Ievadiet jaunu uzdevumu: ");
+    array_push($inputTasks, $task);
 }
 
-do {
-    echo "Uzdevumu pārvaldnieks\n";
-    echo "Ievadīt jaunu uzdevumu => 1\n";
-    echo "Apskatīt uzdevumus => 2\n";
-    $choice = readline("Izvēlies darbību: ");
+function showTask($inputTasks){
+    $index = readLine("Ievadiet uzdevuma index: ");
+    if ($index >= 0 && count($inputTasks) > $index) {
+        echo $inputTasks[$index] . "\n";
+    } else {
+        echo "Invalid number\n";
+        return;
+    }
+}
+// uztaisit do-while ciklu
 
-    switch ($choice) {
-        case '1':
-          echo addTask();
-          break;
-        case '2':
-          echo showAllTasks($taskList);
-          break;
-        case '3':
-          echo "To be implemented\n";
-          break;
-        default:
-          echo "Invalid option!\n";
-      }
+    //$name = readLine("Ievadi savu vardu: \n");
+    //echo "Your name is $name";
 
-    $continue = readline("Vai vēlies turpināt?\n");
-  } while ($continue != "N");
+
+    do {
+        echo "Uzdevumu parvaldnieks\n";
+        echo "Apskatit visus uzdevumus => 1\n ";
+        echo "Ievadit jaunu uzdevumu => 2\n ";
+        echo "Apskatit vienu uzdevumu => 3\n ";
+        
+        $choice = readLine("Izvelies darbibu:");
+
+        switch ($choice) {
+            case '1':
+              showAllTask($taskList);
+              break;
+            case '2':
+              addTask($taskList);
+              break;
+            case '3':
+              showTask($taskList);
+              break;
+            default:
+              echo "Invalid option";
+          }
+      $continue = readLine("Vai velies turpinat?");
+      } while ($continue != "N");
+      
+    
